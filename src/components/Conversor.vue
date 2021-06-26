@@ -1,8 +1,8 @@
 <template>
     <div class="conversor">
         <h2>{{moedaDe}} Para {{moedaPara}}</h2>
-        <input type="text" v-model="moedaDeValue" v-bind:placeholder="moedaDe">
-        <input type="button" v-on:click="converter" value="Converter">
+        <input type="tel" v-model="moedaDeValue" v-on:keypress="isNumber($event)" v-bind:placeholder="moedaDe">
+        <input type="button" v-on:click="converter" class="btn_primary"  value="Converter">
         <h2>{{moedaParaValue}}</h2>
     </div>
 </template>
@@ -27,8 +27,20 @@ export default {
             .then(response => {return response.json()})
             .then(json => {
                 let cotacao = json[dePara];
-                this.moedaParaValue = this.moedaPara+' '+(cotacao * parseFloat(this.moedaDeValue) ).toFixed(2);
+                this.moedaParaValue = this.moedaPara+' '+(cotacao * parseFloat(this.moedaDeValue) ).toFixed(3);
             })
+        },
+        isNumber: function(event) {
+            event = (event) ? event : window.event;
+            var charCode = (event.which) ? event.which : event.keyCode;
+            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46 && charCode !== 13) {
+                event.preventDefault();
+            } else if(charCode === 13) {
+                this.converter();
+                return true;
+            } else {
+                return true;
+            }
         }
     }
 };
@@ -37,7 +49,15 @@ export default {
 <style scoped>
     .conversor {
         max-width: 300px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 8px rgba(42 147 213);
         padding: 20px;
+        border-radius: 6px;
+    }
+
+    .btn_primary {
+        color: #fff;
+        background-color: var(--primary);
+        border-color:  var(--primary);
+        border-radius: 3px;
     }
 </style>
