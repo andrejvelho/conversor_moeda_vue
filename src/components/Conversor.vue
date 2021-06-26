@@ -1,7 +1,7 @@
 <template>
     <div class="conversor">
         <h2>{{moedaDe}} Para {{moedaPara}}</h2>
-        <input type="tel" v-model="moedaDeValue" v-on:keypress="isNumber($event)" v-bind:placeholder="moedaDe">
+        <input type="tel" v-model="moedaDeValue" @focus="selectAll" ref="input" v-on:keypress="isNumber($event)" v-bind:placeholder="moedaDe">
         <input type="button" v-on:click="converter" class="btn_primary"  value="Converter">
         <h2>{{moedaParaValue}}</h2>
     </div>
@@ -30,14 +30,24 @@ export default {
                 this.moedaParaValue = this.moedaPara+' '+(cotacao * parseFloat(this.moedaDeValue) ).toFixed(3);
             })
         },
+        selectAll() {
+           this.$refs.input.select();
+        },
         isNumber: function(event) {
             event = (event) ? event : window.event;
             var charCode = (event.which) ? event.which : event.keyCode;
-            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46 && charCode !== 13) {
+            console.log(charCode);
+            if ((charCode > 31 && (charCode < 48 || charCode > 57)) 
+                    && charCode !== 46 
+                    && charCode !== 13 
+                    && charCode !== 44) {
                 event.preventDefault();
             } else if(charCode === 13) {
                 this.converter();
                 return true;
+            } else if (charCode === 44) {             
+                this.moedaDeValue = this.moedaDeValue+'.';
+                event.preventDefault();
             } else {
                 return true;
             }
