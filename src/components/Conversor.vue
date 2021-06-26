@@ -22,7 +22,7 @@ export default {
         converter() {
             let dePara = this.moedaDe+"_"+this.moedaPara;
             const URL_API = 'https://free.currconv.com/api/v7/convert?q='+dePara+'&compact=ultra&apiKey=0d6223d04ea490efdc5f';
-            
+        
             fetch(URL_API)
             .then(response => {return response.json()})
             .then(json => {
@@ -36,7 +36,6 @@ export default {
         isNumber: function(event) {
             event = (event) ? event : window.event;
             var charCode = (event.which) ? event.which : event.keyCode;
-            console.log(charCode);
             if ((charCode > 31 && (charCode < 48 || charCode > 57)) 
                     && charCode !== 46 
                     && charCode !== 13 
