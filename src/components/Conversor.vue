@@ -28,7 +28,8 @@ export default {
             .then(json => {
                 let cotacao = json[dePara];
                 this.moedaParaValue = this.moedaPara+' '+(cotacao * parseFloat(this.moedaDeValue) ).toFixed(3);
-            })
+            });
+            
         },
         selectAll() {
            this.$refs.input.select();
@@ -68,5 +69,6 @@ export default {
         background-color: var(--primary);
         border-color:  var(--primary);
         border-radius: 3px;
+        cursor: pointer;
     }
 </style>
