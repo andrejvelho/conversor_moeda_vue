@@ -1,29 +1,14 @@
 <template>
-  <div class="div_center">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <h2>Conversor de Moedas</h2>
-  </div>
-  <div class="linha">
-    <Conversor moedaDe="USD" moedaPara="BRL" />
-    <Conversor moedaDe="BRL" moedaPara="USD" />
-  </div>
-  <div class="linha">
-    <Conversor moedaDe="EUR" moedaPara="BRL" />
-    <Conversor moedaDe="BRL" moedaPara="EUR" />
-  </div>
-  <Footer/>
+  <Home/>
 </template>
 
 <script>
-
-import Footer from './components/Footer.vue'
-import Conversor from './components/Conversor.vue';
+import Home from './Home.vue';
 
 export default {
   name: 'App',
   components: {
-    Conversor,
-    Footer
+    Home
   }
 };
 </script>
@@ -53,13 +38,6 @@ body {
   flex-direction: column;
 }
 
-.linha{
-  display: flex;
-  justify-content: space-around;
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-
  @media (max-width: 800px) {
    .linha {
      margin-bottom: 50px;
@@ -67,11 +45,7 @@ body {
    }
 }
 
-.div_center {
-  text-align: center;
-}
-
 a {
-  color: var(--backEnd);
+  color: var(--black);
 }
 </style>
