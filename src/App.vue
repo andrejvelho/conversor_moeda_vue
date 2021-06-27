@@ -44,8 +44,4 @@ body {
      display: grid;
    }
 }
-
-a {
-  color: var(--black);
-}
 </style>
